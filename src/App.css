@@ -1,0 +1,74 @@
+.App{
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(black, gray, ghostwhite);
+}
+.oStyle{
+    display: flex;
+    height: 1em;
+    width: 1em;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    font-size: 7em;
+    color: blue;
+    outline: 1px solid #888;
+    background-color: #e0e1e6;
+}
+.xStyle{
+    display: flex;
+    height: 1em;
+    width: 1em;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    font-size: 7em;
+    color: red;
+    outline: 1px solid #888;
+    background-color: #e0e1e6;
+}
+
+.tictactoe{
+    padding-top: 13em;
+    width: 400px;
+    height: 600px;
+}
+.row {
+    display: flex;
+    width: 100%;
+}
+
+
+
+.buttonStyle{
+    display: flex;
+    height: 1em;
+    width: 1em;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    font-size: 7em;
+    color: black;
+    outline: 1px solid #888;
+    background-color: #e0e1e6;
+}
+.info{
+    display: flex;
+    height: 1em;
+    width: 1em;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: midnightblue ;
+    font-weight: bold;
+
+
+}
