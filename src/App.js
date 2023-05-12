@@ -1,166 +1,90 @@
-//Written by Mohammad Jaafar 7/8/2021
-//TicTacToe game based on react js
+import React, { useState, useEffect } from 'react';
 import './App.css';
-let k=0;
-
-function change1()
-{
-    let btn = document.getElementById("Button1");
-    btn.value = "meow";
-        if( btn.innerHTML=== "" ) {
-            if (k % 2 === 1) {
-                btn.innerHTML = 'O';
-                btn.className = "oStyle";
-            } else {btn.innerHTML = 'X';
-                     btn.className = "xStyle"; }
-
-            k++;
-            console.log(k)
-        }
-
-}
-function change2()
-{
-    let btn = document.getElementById("Button2");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change3()
-{
-    let btn = document.getElementById("Button3");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change4()
-{
-    let btn = document.getElementById("Button4");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change5()
-{
-    let btn = document.getElementById("Button5");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change6()
-{
-    let btn = document.getElementById("Button6");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change7()
-{
-    let btn = document.getElementById("Button7");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change8()
-{
-    let btn = document.getElementById("Button8");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
-function change9()
-{
-    let btn = document.getElementById("Button9");
-    btn.value = "meow";
-    if( btn.innerHTML=== "" ) {
-        if (k % 2 === 1) {
-            btn.innerHTML = 'O';
-            btn.className = "oStyle";
-        } else {btn.innerHTML = 'X';
-            btn.className = "xStyle"; }
-        k++;
-        console.log(k)
-    }
-}
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSync } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
-  return (
-      <div className={"App"}>
-          <div className={"tictactoe"}>
-              <div className={"row"}>
-    <button onClick={change1} className={"buttonStyle"} id={"Button1"}></button>
-    <button onClick={change2} className={"buttonStyle"} id={"Button2"}></button>
-    <button onClick={change3} className={"buttonStyle"} id={"Button3"}></button>
-              </div>
-              <div className={"row"}>
-                  <button onClick={change4} className={"buttonStyle"} id={"Button4"}></button>
-                  <button onClick={change5} className={"buttonStyle"} id={"Button5"}></button>
-                  <button onClick={change6} className={"buttonStyle"} id={"Button6"}></button>
-              </div>
-              <div className={"row"}>
-                  <button onClick={change7} className={"buttonStyle"} id={"Button7"}></button>
-                  <button onClick={change8} className={"buttonStyle"} id={"Button8"}></button>
-                  <button onClick={change9} className={"buttonStyle"} id={"Button9"}></button>
-              </div>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <div className={"row"}>
-                  <div className={"info"}>Tic Tac Toe By Moe Jaafar</div>
-              </div>
-          </div>
+  const [gameState, setGameState] = useState(Array(9).fill(null));
+  const [isXTurn, setIsXTurn] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
 
+  const checkForWinner = (gameState) => {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+        return gameState[a];
+      }
+    }
+    return null;
+  }
+
+  const handleCellClick = (index) => {
+    if (!gameState[index] && !gameOver) {
+      setGameState(prev => {
+        const newState = [...prev];
+        newState[index] = isXTurn ? 'X' : 'O';
+        return newState;
+      });
+      setIsXTurn(!isXTurn);
+    }
+  }
+
+  const resetGame = () => {
+    setGameState(Array(9).fill(null));
+    setIsXTurn(true);
+    setGameOver(false);
+  }
+
+  useEffect(() => {
+    // Check for a winner after every render
+    const winner = checkForWinner(gameState);
+    if (winner && !gameOver) {
+      setGameOver(true);
+      alert(`Player ${winner} wins!`);
+    }
+  }, [gameState, gameOver]);
+
+  return (
+    <div className="App">
+      <div className="tictactoe">
+        <div className="title"> <h1>Tic Tac Toe</h1>  </div>
+        {[0, 1, 2].map(i => (
+          <div className="row" key={i}>
+            {[0, 1, 2].map(j => (
+              <button 
+                key={3*i + j}
+                onClick={() => handleCellClick(3*i + j)}
+                className={gameState[3*i + j] === 'O' ? "oStyle" : gameState[3*i + j] === 'X' ? "xStyle" : "buttonStyle"} 
+              >
+                {gameState[3*i + j]}
+              </button>
+            ))}
+          </div>
+        ))}
+        
+        <br/>
+        <button onClick={resetGame} className={"resetbuttonStyle"}>
+  <FontAwesomeIcon icon={faSync} />
+</button>
+        
+        <div class="logo-container">
+          <a href="https://github.com/MoeJaafar" target="_blank" rel="noreferrer" >
+            <img src='./black.png' alt="MOE J" />
+          </a>
+        </div>
+        
       </div>
+    </div>
   );
 }
 
